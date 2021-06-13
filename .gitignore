@@ -43,3 +43,5 @@ yarn-debug.log*
 .ruby-gemset
 
 .rspec
+
+.env

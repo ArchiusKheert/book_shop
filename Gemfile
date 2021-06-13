@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
@@ -48,6 +50,7 @@ group :development do
   gem 'spring'
   gem 'rubocop', '~> 1.16', '>= 1.16.1'
   gem 'pg', '~> 1.2', '>= 1.2.3'
+  gem 'letter_opener', '~> 1.7'
 end
 
 group :test do
@@ -63,6 +66,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.8'
 gem 'omniauth-facebook', '~> 8.0'
+gem 'omniauth', '~> 2.0', '>= 2.0.4'
 gem 'rabl', '~> 0.14.5'
 gem 'cancancan', '~> 3.2', '>= 3.2.2'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
@@ -72,3 +76,4 @@ gem 'doorkeeper', '~> 5.5', '>= 5.5.2'
 gem 'haml', '~> 5.2', '>= 5.2.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'font-awesome-sass', '~> 5.15', '>= 5.15.1'
