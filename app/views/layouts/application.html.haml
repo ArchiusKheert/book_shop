@@ -10,8 +10,6 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
-    %p.notice.text-center
-      = notice
-    %p.alert.text-center
-      = alert
+    = render 'header'
     = yield
+    = render 'footer'

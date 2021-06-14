@@ -62,8 +62,8 @@
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.10.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.8.1, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="factory_girl (v4.9.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="factory_girl_rails (v4.9.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="factory_bot (v6.2.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="factory_bot_rails (v6.2.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faraday (v1.4.2, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faraday-em_http (v1.0.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faraday-em_synchrony (v1.0.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
@@ -199,7 +199,7 @@
         <option value="erb:controller" />
         <option value="erb:mailer" />
         <option value="erb:scaffold" />
-        <option value="factory_girl:model" />
+        <option value="factory_bot:model" />
         <option value="generator" />
         <option value="haml:application_layout" />
         <option value="helper" />
@@ -276,7 +276,7 @@
         <option value="erb:controller" />
         <option value="erb:mailer" />
         <option value="erb:scaffold" />
-        <option value="factory_girl:model" />
+        <option value="factory_bot:model" />
         <option value="generator" />
         <option value="haml:application_layout" />
         <option value="helper" />
