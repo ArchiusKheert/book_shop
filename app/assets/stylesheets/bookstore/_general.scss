@@ -62,13 +62,17 @@ img {
     white-space: nowrap;
 }
 .general-nav-mail {
-    font-size: $font-size-small;
-    color: $gold-500;
+  color: gold;
     text-align: center;
     margin-bottom: 15px;
 }
+
+.general-nav-mail {
+  font-size: small;
+}
+
 .general-nav-number {
-    font-size: $font-size-small;
+    font-size: small;
     color: white;
     text-align: center;
     margin-bottom: 25px;
@@ -89,13 +93,13 @@ img {
     padding-top: 20px;
 }
 .general-back-link {
-    font-size: $font-size-base;
-    color: $grey-600;
+    font-size: medium;
+    color: grey;
     display: inline-block;
     margin-bottom: 30px;
 &:hover,
 &:focus {
-     color: $grey-600;
+     color: grey;
  }
 }
 .general-position {
@@ -130,17 +134,17 @@ img {
     margin-bottom: 35px;
 }
 .general-subtitle {
-    color: $gold-500;
+    color: gold;
     font-weight: 400;
 }
 .general-info-text {
-    font-size: $font-size-base;
-    color: $grey-600;
+    font-size: medium;
+    color: grey;
     font-weight: 300;
 }
 .general-form-help {
     font-size: 18px;
-    color: $grey-600;
+    color: grey;
     position: absolute;
     top: 35px;
     right: 8px;
@@ -148,39 +152,39 @@ img {
 }
 .general-address {
     font-size: 16px;
-    color: $grey-900;
+    color: grey;
     font-weight: 300;
     line-height: 2;
 }
 .general-edit {
     font-size: 13px;
-    color: $grey-600;
+    color: grey;
 }
 .general-order-number {
     font-size: 18px;
-    color: $gold-500;
+    color: gold;
     font-weight: 600;
 }
 .general-sign-text {
-    color: $grey-700;
+    color: grey;
     font-weight: 300;
 }
 .general-login-title {
     font-size: 18px;
-    color: $grey-900;
+    color: grey;
     font-weight: 400;
     margin-top: 0;
     margin-bottom: 40px;
 }
 .general-login-icon {
     font-size: 24px;
-    color: $grey-900;
+    color: grey;
     display: inline-block;
     margin-bottom: 20px;
     cursor: pointer;
 }
 .general-login-text {
-    color: $grey-600;
+    color: grey;
     font-weight: 300;
     margin-bottom: 25px;
 }
@@ -190,7 +194,7 @@ img {
 }
 .general-password-text {
     font-size: 16px;
-    color: $grey-600;
+    color: grey;
     font-weight: 300;
     margin: 0 20px 25px;
 }
@@ -199,33 +203,33 @@ img {
 }
 .general-order-number {
     font-size: 16px;
-    color: $gold-500;
+    color: gold;
     font-weight: 300;
 }
 .general-message-wrap {
     padding: 30px 0 25px;
 }
 .general-message-verified {
-    font-size: $font-size-small;
-    color: $grey-350;
+    font-size: small;
+    color: grey;
     line-height: 21px;
     float: right;
     margin-left: 20px;
     margin-bottom: 10px;
 }
 .general-message-name {
-    font-size: $font-size-base;
-    color: $gold-500;
+    font-size: medium;
+    color: gold;
     margin-bottom: 10px;
 }
 .general-message-date {
-    font-size: $font-size-base;
-    color: $grey-600;
+    font-size: medium;
+    color: grey;
     float: right;
 }
 
 
-@media (min-width: $grid-float-breakpoint) {
+@media (min-width: 768px) and (max-width: 1000px) {
     .general-main-wrap {
         margin-bottom: 100px;
     }
@@ -275,7 +279,7 @@ img {
     }
     .general-order-wrap {
         margin-bottom: 35px;
-        border-bottom: 1px solid $grey-200;
+        border-bottom: 1px solid grey;
     }
     .general-input-group {
         margin-bottom: 10px;
@@ -311,7 +315,7 @@ img {
     }
 }
 
-@media (min-width: $screen-md-min) {
+@media (min-width: 992px) {
     .res-mr-200 {
         margin-right: 200px;
     }
