@@ -14,11 +14,8 @@ RSpec.describe User, type: :model do
 
   end
 
-  it '#first_name returns a string' do
-    expect(@user.first_name).to match 'User'
+  it '#name returns a string' do
+    expect(@user.name).to match 'User Name'
   end
 
-  it '#last_name returns a string' do
-    expect(@user.last_name).to match 'Name'
-  end
 end
