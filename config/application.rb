@@ -11,6 +11,7 @@ module BookShop
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.generators.system_tests = nil
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -19,5 +20,10 @@ module BookShop
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators do |t|
+      t.test_framework :rspec
+      t.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
   end
 end
