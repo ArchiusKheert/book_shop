@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_28_140421) do
+ActiveRecord::Schema.define(version: 2021_06_28_165623) do
+
+  create_table "author_books", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_author_books_on_author_id"
+    t.index ["book_id"], name: "index_author_books_on_book_id"
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -30,6 +39,14 @@ ActiveRecord::Schema.define(version: 2021_06_28_140421) do
     t.decimal "depth"
     t.integer "year_of_publication"
     t.string "materials"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_books_on_category_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -72,6 +89,9 @@ ActiveRecord::Schema.define(version: 2021_06_28_140421) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "author_books", "authors"
+  add_foreign_key "author_books", "books"
+  add_foreign_key "books", "categories"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

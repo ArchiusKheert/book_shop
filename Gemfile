@@ -37,6 +37,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'sqlite3', '~> 1.4'
+  gem 'ffaker', '~> 2.18'
 end
 
 group :development do
@@ -57,7 +58,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
-  gem 'ffaker', '~> 2.18'
+
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
