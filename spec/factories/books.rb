@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :book do
-    name { "MyString" }
+    title { "MyString" }
     price { "9.99" }
     quantity { 1 }
     description { "MyText" }
