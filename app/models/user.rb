@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :omniauthable, omniauth_providers: [:facebook]
 
-  validates :password, format: { with: /\A\S*(?=\S{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\S*\z/,
-                                 message: 'should be minimum 8 letters, at least 1 lowercase, at least 1 uppercase, at least 1 number. No whitespaces',
-                                  unless: ->(user) {user.password.nil?}
+  validates :password, format: { with: /\A\S(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\S*\z/,
+                                 message: 'should contain at least 1 lowercase, at least 1 uppercase, at least 1 number. No whitespaces',
+
                                  }
   has_many :reviews
 

@@ -1,13 +1,15 @@
 FactoryBot.define do
   factory :book do
-    title { "MyString" }
-    price { "9.99" }
+    title FFaker::Book.title
+    price [5.99,10.99,15.99,20.99,35.99,99.99].sample,
     quantity { 1 }
-    description { "MyText" }
+    description FFaker::Book.description
     height { "9.99" }
     width { "9.99" }
     depth { "9.99" }
-    year_of_publication { 1 }
-    materials { "MyString" }
+    year_of_publication FFaker::Vehicle.year
+    materials FFaker::Lorem.words.join(', ')
+    authors []
+    reviews []
   end
 end
