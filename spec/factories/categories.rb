@@ -8,6 +8,6 @@ FactoryBot.define do
   end
 
   factory :category_updated do
-    name "Updated category name"
+    name {"Updated category name"}
   end
 end
