@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Authors", type: :request do
   let(:author_params) {FactoryBot.attributes_for(:author).stringify_keys}
-  let(:author) {FactoryBot.build_stubbed(:author)}
+  let(:author) {FactoryBot.create(:author)}
 
   describe 'GET #show' do
     before do

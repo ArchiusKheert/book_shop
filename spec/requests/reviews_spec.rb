@@ -2,10 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "Reviews", type: :request do
   let(:review_params) {FactoryBot.attributes_for(:review).stringify_keys}
-  let(:review) {FactoryBot.build_stubbed(:review)}
+  let(:user) {FactoryBot.create(:user)}
+  let(:book) {FactoryBot.create(:book)}
+  let(:review) {FactoryBot.build(:review)}
 
   describe "GET #show" do
     before do
+      review.user_id = user.id
+      review.book_id = book.id
+      review.save
       allow(Review).to receive(:find).and_return review
     end
 
