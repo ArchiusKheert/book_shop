@@ -6,10 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create(email: FFaker::Internet.safe_email,
-              password: "P1-#{FFaker::Internet.password}",
-              name: FFaker::Name.name,
-              image: FFaker::Avatar.image)
+User.create!(email:FFaker::Internet.safe_email,
+             password: 'test1234TEST',
+             name:FFaker::Name.name,
+             image:FFaker::Avatar.image)
+
+user = User.last
 
 Category.create(name: 'Fantasy')
 Category.create(name: 'Novel')
@@ -24,30 +26,52 @@ categories = Category.all
                 description: FFaker::Lorem.paragraph)
 end
 authors = Author.all
+
+def book_authors(authors)
+  selected_authors = []
+  rand(1..3).times do
+    author=authors.sample
+    selected_authors << author unless selected_authors.include?(author)
+  end
+  selected_authors
+end
+
+def book_categories(categories)
+  selected_categories = []
+  rand(1..3).times do
+    category=categories.sample
+    selected_categories << category unless selected_categories.include?(category)
+  end
+  selected_categories
+end
+
 30.times do
   Book.create(title: FFaker::Book.title,
               price: [5.99,10.99,15.99,20.99,35.99,99.99].sample,
               quantity: 1,
               description: FFaker::Book.description,
-              height: [3.50,7.9,4.6,6.2].sample,
-              width: [3.12,4.5,2.9,3.6].sample,
-              depth: [0.9,0.8,0.7].sample,
-              year_of_publication: FFaker::Vehicle.year,
+              height: rand(7.5..10.0).floor(2),
+              width: rand(4.5..5.5).floor(2),
+              depth: rand(0.3..4.0).floor(2),
+              year_of_publication: rand(1991..2021),
               materials: FFaker::Lorem.words.join(', '),
-              authors: [authors.sample, authors.sample],
-              categories: [categories.sample])
+              authors: book_authors(authors),
+              categories: book_categories(categories))
 end
 
 
-book = Book.first
+books = Book.all
 
 
-5.times do
-  Review.create(title: FFaker::HipsterIpsum.words,
-                text: FFaker::HipsterIpsum.sentences,
-                rating: (1..5).to_a_sample,
-                book_id: book.id,
-                user_id: user.id)
+books.each do |book|
+  rand(1..4).times do
+    user = User.last
+    Review.create!(title:FFaker::Lorem.words.join(', '),
+                   text:FFaker::Lorem.sentences.join('. '),
+                   rating: rand(1..5),
+                   book_id: book.id,
+                   user_id: user.id)
+  end
 end
 
 

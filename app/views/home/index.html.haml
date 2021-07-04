@@ -4,30 +4,14 @@
       %li.active{'data-target': "#slider", 'data-slide-to': "0"}
       %li{'data-target': "#slider", 'data-slide-to': "1"}
     .carousel-inner{role: "listbox"}
-      .item.active
-        .row
-          .col-sm-5
-            .general-img-wrap
-              %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
-          .col-sm-7
-            .mb-60
-              %h1 Harry Potter and the Philosopher's Stone
-              %p.lead Inspiring Story about the young mage
-              %p.lead.small J.K.Rowling
-              .general-align
-                %button.disabled.btn Buy Now
-      .item
-        .row
-          .col-sm-5
-            .general-img-wrap
-              %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
-          .col-sm-7
-            .mb-60
-              %h1 Harry Potter and the Philosopher's Stone
-              %p.lead Inspiring Story about the young mage
-              %p.lead.small J.K.Rowling
-              .general-align
-                %button.btn.btn-primary Buy Now
+      - @latest_books.each_with_index do |book,index|
+        -if index == 0
+          .item.active
+            =render 'latest_books_item', book:book
+        -else
+          .item
+            =render 'latest_books_item', book:book
+
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -43,67 +27,5 @@
     .mb-35
       %h3 Best Sellers
       .row
-        .col-sm-6.col-md-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .mb-35
-            .clearfix
-              %p.pull-right.font-16.in-gold-500 $25.50
-              %p.title.mr-55 Harry Potter
-            %span.divider-sm
-            %p.lead.small J.K.Rowling
-        .col-sm-6.col-md-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .mb-35
-            .clearfix
-              %p.pull-right.font-16.in-gold-500 $25.50
-              %p.title.mr-55 Harry Potter
-            %span.divider-sm
-            %p.lead.small J.K.Rowling
-        .col-sm-6.col-md-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .mb-35
-            .clearfix
-              %p.pull-right.font-16.in-gold-500 $25.50
-              %p.title.mr-55 Harry Potter
-            %span.divider-sm
-            %p.lead.small J.K.Rowling
-        .col-sm-6.col-md-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .mb-35
-            .clearfix
-              %p.pull-right.font-16.in-gold-500 $25.50
-              %p.title.mr-55 Harry Potter
-            %span.divider-sm
-            %p.lead.small J.K.Rowling
+        -@bestsellers.each do |book|
+          =render 'bestsellers_item', book:book
