@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'orders', to: "orders#index"
   get 'settings', to: "settings#index"
+  get 'catalog', to: "catalog#index"
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end
