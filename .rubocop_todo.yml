@@ -75,8 +75,7 @@ Layout/EmptyLinesAroundClassBody:
 Layout/EmptyLinesAroundMethodBody:
   Exclude:
     - 'app/controllers/home_controller.rb'
-    - 'app/controllers/orders_controller.rb'
-    - 'app/controllers/settings_controller.rb'
+
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -216,8 +215,7 @@ Style/Documentation:
 Style/EmptyMethod:
   Exclude:
     - 'app/controllers/home_controller.rb'
-    - 'app/controllers/orders_controller.rb'
-    - 'app/controllers/settings_controller.rb'
+
 
 # Offense count: 2
 # Cop supports --auto-correct.
