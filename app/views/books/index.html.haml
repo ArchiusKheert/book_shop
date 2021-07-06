@@ -1,30 +1,29 @@
 %main.container
   %h1.general-title-margin Сatalog
-  = @current_category
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
         = render 'sort_by'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
-        = link_to books_path, class: "filter-link #{'active' unless @current_category.length > 0}" do
-
+        = link_to books_path, class: "filter-link #{'active' unless @current_category.id}" do
           All
           %span.badge.general-badge= Book.count
-        - @categories.each do |category|
-          %li.mr-35
-            = link_to books_path(category_id: "#{category.id}"), class: "filter-link #{'active' if @current_category == category.id}" do
-              = category.name
-              %span.badge.general-badge = category.books.size
-
+      - categories.each do |category|
+        %li.mr-35
+          = link_to books_path(category_id: "#{category.id}"), class: "filter-link #{'active' if category.id == @current_category.id}" do
+            = category.name
+            %span.badge.general-badge= category.books.size
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-        All
+        = @current_category.name
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
-        - @categories.each do |category|
+        %li
+          = link_to "All", books_path
+        - categories.each do |category|
           %li
             = link_to "#{category.name}", books_path(category_id: category.id)
     %p.lead.small.mb-10 Sort by
@@ -37,19 +36,18 @@
           .col-xs-6.col-sm-3
             .general-thumb-wrap
               .thumbnail.general-thumbnail
-                %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
                 .thumb-hover
                   .general-thumb-link-wrap
-                    %a.thumb-hover-link{href: books_path(book)}
+                    %a.thumb-hover-link{href: book_path(book)}
                       %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
                     %a.thumb-hover-link{href: "#"}
                       %i.fa.fa-shopping-cart.thumb-icon
             .general-thumb-info
               %p.title= book.title
-              %p.font-16.in-gold-500= "$#{book.price}"
+              %p.font-16.in-gold-500= "€#{book.price}"
               %span.divider-sm
               %p.lead.small= book_authors(book)
-
     .text-center
       %button.btn.btn-primary View More
       = paginate @books
