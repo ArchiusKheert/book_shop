@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
-  before_action :set_categories, only: %i[ index ]
+  before_action :set_categories, only: %i[ index show ]
   before_action :set_current, only: %i[ index show]
   before_action :set_cookies, only: %i[ index ]
 
