@@ -16,13 +16,9 @@ RSpec.describe "/books", type: :request do
   
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:book_params) {FactoryBot.attributes_for(:book).stringify_keys}
+  let(:category) {FactoryBot.create(:category)}
+  let(:book) {FactoryBot.build(:book)}
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -33,10 +29,25 @@ RSpec.describe "/books", type: :request do
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
-      book = Book.create! valid_attributes
-      get book_url(book)
-      expect(response).to be_successful
+    before do
+      book.category_id = category.id
+      book.save
+      allow(Book).to receive(:find).and_return book
+    end
+
+    it 'receives find and return book' do
+      expect(Book).to receive(:find).with(book_id.to_s)
+      get :show, params: {id: book.id}
+    end
+
+    it 'assign @book' do
+      get :show, params: {id: book.id}
+      expect(assigns(:book)).not_to be_nil
+    end
+
+    it 'renders and show template' do
+      get :show, params: {id: book.id}
+      expect(response).to render_template :show
     end
   end
 

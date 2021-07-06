@@ -4,7 +4,7 @@
       %li.active{'data-target': "#slider", 'data-slide-to': "0"}
       %li{'data-target': "#slider", 'data-slide-to': "1"}
     .carousel-inner{role: "listbox"}
-      - @latest_books.each_with_index do |book,index|
+      - @bestsellers.each_with_index do |book,index|
         -if index == 0
           .item.active
             =render 'latest_books_item', book:book

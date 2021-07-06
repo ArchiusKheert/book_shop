@@ -3,14 +3,12 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
-        = render 'order_dropdown'
+
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %a.filter-link.active{href: "#"}
           All
           %span.badge.general-badge= Book.count
-      - @categories.each do |category|
-        = render 'categories_list', category: category
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
     .dropdown
@@ -18,11 +16,9 @@
         All
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
-        - @categories.each do |category|
-          = render 'categories_filter', category: category
     %p.lead.small.mb-10 Sort by
     .dropdown
-      = render 'order_dropdown'
+
   .mb-120
     - @books.in_groups_of(4) do |group|
       .row
@@ -39,7 +35,7 @@
                       %i.fa.fa-shopping-cart.thumb-icon
             .general-thumb-info
               %p.title= book.title
-              %p.font-16.in-gold-500= "€#{book.price}"
+              %p.font-16.in-gold-500= "$#{book.price}"
               %span.divider-sm
               %p.lead.small= book_authors(book)
               = link_to_next_page @books, 'Next Page'

@@ -38,7 +38,7 @@ end
 
 def book_categories(categories)
   selected_categories = []
-  rand(1..3).times do
+  1.times do
     category=categories.sample
     selected_categories << category unless selected_categories.include?(category)
   end
@@ -56,7 +56,7 @@ end
               year_of_publication: rand(1991..2021),
               materials: FFaker::Lorem.words.join(', '),
               authors: book_authors(authors),
-              categories: book_categories(categories))
+              category_id: book_categories(categories)[0].id)
 end
 
 

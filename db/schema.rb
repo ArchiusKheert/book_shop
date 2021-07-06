@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_073546) do
+ActiveRecord::Schema.define(version: 2021_07_05_160522) do
 
   create_table "author_books", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -41,15 +41,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_073546) do
     t.string "materials"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "books_categories", force: :cascade do |t|
-    t.integer "book_id", null: false
     t.integer "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_books_categories_on_book_id"
-    t.index ["category_id"], name: "index_books_categories_on_category_id"
+    t.index ["category_id"], name: "index_books_on_category_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -99,8 +92,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_073546) do
 
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
-  add_foreign_key "books_categories", "books"
-  add_foreign_key "books_categories", "categories"
+  add_foreign_key "books", "categories"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

@@ -4,7 +4,7 @@ module BooksHelper
     book.description.slice(0,size-3).concat('...')
   end
 
-  def book_authors
+  def book_authors(book)
     book.authors.map { |aut| author_name(aut) }.join(', ')
   end
 end

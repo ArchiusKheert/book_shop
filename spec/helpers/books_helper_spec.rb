@@ -12,7 +12,7 @@ require 'rails_helper'
 # end
 RSpec.describe BooksHelper, type: :helper do
   before :each do
-    @book = FactoryBot.create(:book)
+    @book = FactoryBot.build(:book)
   end
 
   subject {@book}

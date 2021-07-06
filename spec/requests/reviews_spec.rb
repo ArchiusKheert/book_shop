@@ -3,11 +3,14 @@ require 'rails_helper'
 RSpec.describe "Reviews", type: :request do
   let(:review_params) {FactoryBot.attributes_for(:review).stringify_keys}
   let(:user) {FactoryBot.create(:user)}
-  let(:book) {FactoryBot.create(:book)}
   let(:review) {FactoryBot.build(:review)}
+  let(:category) {FactoryBot.create(:category)}
+  let(:book) {FactoryBot.build(:review)}
 
   describe "GET #show" do
     before do
+      book.category_id = category.id
+      book.save
       review.user_id = user.id
       review.book_id = book.id
       review.save

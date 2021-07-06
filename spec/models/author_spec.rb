@@ -11,6 +11,6 @@ RSpec.describe Author, type: :model do
   it { expect(subject).to validate_length_of :first_name}
   it { expect(subject).to validate_length_of :last_name}
 
-  it {expect(subject).to have_and_belongs_to_many(:books)}
+  it {expect(subject).to have_many(:books)}
 
 end
