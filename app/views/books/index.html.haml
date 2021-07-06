@@ -3,12 +3,14 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
-
+        = render 'order_dropdown'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
-        %a.filter-link.active{href: "#"}
+        %a.filter-link.active{href: books_path}
           All
           %span.badge.general-badge= Book.count
+      - @categories.each do |category|
+        = render 'categories_list', category: category
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
     .dropdown
@@ -16,9 +18,11 @@
         All
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
+        - @categories.each do |category|
+          = render 'categories_filter', category: category
     %p.lead.small.mb-10 Sort by
     .dropdown
-
+      = render 'order_dropdown'
   .mb-120
     - @books.in_groups_of(4) do |group|
       .row
@@ -29,7 +33,7 @@
                 %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
                 .thumb-hover
                   .general-thumb-link-wrap
-                    %a.thumb-hover-link{href: "#"}
+                    %a.thumb-hover-link{href: books_path(book)}
                       %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
                     %a.thumb-hover-link{href: "#"}
                       %i.fa.fa-shopping-cart.thumb-icon
@@ -38,8 +42,7 @@
               %p.font-16.in-gold-500= "$#{book.price}"
               %span.divider-sm
               %p.lead.small= book_authors(book)
-              = link_to_next_page @books, 'Next Page'
-              .text-center
-                %button.btn.btn-primary View More
 
-
+    = paginate @books
+    .text-center
+      %button.btn.btn-primary View More

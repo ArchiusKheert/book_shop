@@ -7,4 +7,6 @@ class Book < ApplicationRecord
   validates :title, uniqueness: true
 
   paginates_per 15
+
+  scope :by_category, -> (category_id) {where category_id: category_id}
 end
