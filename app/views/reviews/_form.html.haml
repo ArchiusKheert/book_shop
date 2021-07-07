@@ -1,10 +1,10 @@
 = form_with(model: [ @book, @book.reviews.build ]) do |f|
   .form-group
-    = form.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :user_id, value: current_user.id
   .form-group.mb-30
 
     = f.label :rating, class: "control-label input-label"
-    = f.number_field :rating, class: "form-control"
+    = f.number_field :rating, class: "form-control", max: 5, min: 1
   .form-group.mb-30
     = f.label :title, class: "control-label input-label"
     = f.text_area :title, class: "form-control"
