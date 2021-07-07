@@ -1,0 +1,18 @@
+- @books.in_groups_of(4) do |group|
+  .row
+    - group.compact.each do |book|
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail
+            %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+            .thumb-hover
+              .general-thumb-link-wrap
+                %a.thumb-hover-link{href: book_path(book)}
+                  %i.fa.fa-eye.thumb-icon{'aria-hidden': 'true'}
+                %a.thumb-hover-link{href: ""}
+                  %i.fa.fa-eye.thumb-icon
+        .general-thumb-info
+          %p.title= book.title
+          %p.font-16.in-gold-500= "$#{book.price}"
+          %span.divider-sm
+          %p.lead.small= book_authors(book)
