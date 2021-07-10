@@ -21,8 +21,8 @@ class Review < ApplicationRecord
     too_short: "must have at least %{count+1} characters"
   }
   validates :title, :text,
-            format: { with: %r/\A[a-zA-Z0-9 !#$%&'*+-\/=?^_`{|}~]*\z/,
-                      message: "must consist of a-z, A-Z, 0-9, or one of !#$%&'*+-/=?^_`{|}~" }
+            format: { :with => %r/\A[a-zA-Z0-9 \n\r!#$%&'*+-\/=?^_`{|}~]*\z/,
+                      :message => "must consist of a-z, A-Z, 0-9, or one of !#$%&'*+-/=?^_`{|}~" }
 
   scope :unprocessed, -> { where status: 'unprocessed' }
   scope :processed, -> { where status: 'approved' || 'rejected' }

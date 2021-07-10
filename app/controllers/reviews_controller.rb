@@ -4,9 +4,15 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
-    @book = Book.find(params[:book_id])
-    @review = @book.reviews.create(review_params)
-    redirect_to book_path(@book)
+    @review = Review.new(review_params)
+
+    if @review.save
+      flash[:success] = 'Review was created'
+    else
+      flash[:danger] = @review.error.full_messages.join('. ')
+    end
+
+    redirect_back(fallback_location: root_path)
   end
 
 
