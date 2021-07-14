@@ -1,6 +1,6 @@
 .general-message-wrap.divider-lg
   .clearfix
-    %img.img-circle.logo-size.inlide-block.pull-left{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg"}
+    =image_tag review.user.image, class: "img-circle logo-size inline-block pull-left"
     .ml-70
       %div
         .general-message-date.hidden-xs= review.created_at.strftime("%d/%m/%y")
