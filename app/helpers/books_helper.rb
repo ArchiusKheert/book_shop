@@ -5,7 +5,7 @@ module BooksHelper
   end
 
   def book_authors(book)
-    book.authors.map { |aut| author_name(aut) }.join(', ')
+    book.authors.map { |aut| "#{aut.first_name} #{aut.last_name}" }.join(', ')
   end
 
   def book_dimensions(book)
