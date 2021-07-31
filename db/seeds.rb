@@ -17,16 +17,16 @@ Category.delete_all
   User.create!(email: FFaker::Internet.safe_email,
                password: "#{rand(10..99)}TesT#{rand(10..99)}",
                name: FFaker::Name.name,
-               image: FFaker::Avatar.image)
+               avatar: FFaker::Avatar.image)
 end
 
-
+user = User.last
 users = User.all
 
-Category.create(name: 'Fantasy')
-Category.create(name: 'Novel')
-Category.create(name: 'Detective')
-Category.create(name: 'Science literature')
+
+%w[Fantasy Novel Detective Science].each do |cat|
+  Category.create(name: cat)
+end
 
 categories = Category.all
 
@@ -46,17 +46,12 @@ def book_authors(authors)
   selected_authors
 end
 
-def book_categories(categories)
-  selected_categories = []
-  1.times do
-    category=categories.sample
-    selected_categories << category unless selected_categories.include?(category)
-  end
-  selected_categories
-end
+used_book_titles = []
 
 300.times do
-  Book.create(title: FFaker::Book.title,
+  title = FFaker::Book.title
+  used_book_titles.include?(title) ? title << "#{rand(1..5)}": used_book_titles << title
+  Book.create(title: title,
               price: [5.99,10.99,15.99,20.99,35.99,99.99].sample,
               quantity: 1,
               description: FFaker::Book.description.join('. ')+ FFaker::Book.description.join('. '),
@@ -65,7 +60,6 @@ end
               depth: rand(0.3..4.0).floor(2),
               year_of_publication: rand(1991..2021),
               materials: FFaker::Lorem.words.join(', '),
-              authors: book_authors(authors),
               category_id: categories.sample.id )
 end
 
@@ -74,6 +68,9 @@ books = Book.all
 
 
 books.each do |book|
+  book_authors(authors).each do |author|
+    Authorship.create!(author_id: author.id, book_id: book.id)
+  end
   rand(1..4).times do
     user = User.last
     Review.create!(title:FFaker::Lorem.words.join(', '),

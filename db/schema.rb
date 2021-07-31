@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_160522) do
-
-  create_table "author_books", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "book_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_author_books_on_author_id"
-    t.index ["book_id"], name: "index_author_books_on_book_id"
-  end
+ActiveRecord::Schema.define(version: 2021_07_31_111030) do
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -29,10 +20,17 @@ ActiveRecord::Schema.define(version: 2021_07_05_160522) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "authorships", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "book_id", null: false
+    t.index %w[author_id book_id], name: "index_authorships_on_author_id_and_book_id"
+    t.index ["author_id"], name: "index_authorships_on_author_id"
+    t.index ["book_id"], name: "index_authorships_on_book_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.decimal "price", precision: 5, scale: 2
-    t.integer "quantity"
     t.text "description"
     t.decimal "height", precision: 4, scale: 2
     t.decimal "width", precision: 4, scale: 2
@@ -84,14 +82,14 @@ ActiveRecord::Schema.define(version: 2021_07_05_160522) do
     t.string "provider", default: "email"
     t.string "uid"
     t.string "name"
-    t.string "image"
+    t.string "avatar"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "author_books", "authors"
-  add_foreign_key "author_books", "books"
+  add_foreign_key "authorships", "authors"
+  add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
