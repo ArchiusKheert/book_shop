@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_111030) do
+ActiveRecord::Schema.define(version: 2021_07_31_125300) do
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_07_31_111030) do
   create_table "authorships", force: :cascade do |t|
     t.integer "author_id", null: false
     t.integer "book_id", null: false
-    t.index %w[author_id book_id], name: "index_authorships_on_author_id_and_book_id"
+    t.index ["author_id", "book_id"], name: "index_authorships_on_author_id_and_book_id"
     t.index ["author_id"], name: "index_authorships_on_author_id"
     t.index ["book_id"], name: "index_authorships_on_book_id"
   end
@@ -47,6 +47,27 @@ ActiveRecord::Schema.define(version: 2021_07_31_111030) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "book_id", null: false
+    t.integer "order_id", null: false
+    t.index ["book_id"], name: "index_order_items_on_book_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "number"
+    t.string "status"
+    t.decimal "total", precision: 11, scale: 2
+    t.datetime "completed_at"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -91,6 +112,9 @@ ActiveRecord::Schema.define(version: 2021_07_31_111030) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "order_items", "books"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

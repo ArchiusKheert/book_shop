@@ -16,5 +16,5 @@ RSpec.describe BooksHelper, type: :helper do
   end
 
   subject {@book}
-  
+
 end
