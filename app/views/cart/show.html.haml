@@ -1,0 +1,40 @@
+%main.container.general-img-wrap
+  %h1.general-title-margin Cart
+  .visible-xs
+    - @order_items.each do |order_item|
+      = render 'order_itmes_extra', order_item: order_item
+  .hidden-xs
+    %table.table.table-hover
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600 Product
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600 Price
+        %th.col-quantity
+          %span.in-grey-600 Quantity
+        %th.col-total
+          %span.in-grey-600 SubTotal
+        %th.col-close
+      - @order_items.each do |order_item|
+        = render 'order_items', order_item: order_item
+  .general-order-wrap
+    .row
+      .col-sm-8
+        .res-mr-200.text-center.general-text-right
+          %p.in-gold-500.font-18 Order Summary
+          %table.general-summary-table.general-summary-table-right.general-text-right
+            %tr
+              %td
+                %p.font-16 Subtotal:
+              %td
+                %p.font-16 $228.32
+            %tr
+              %td
+                %strong.font-18 Order Total:
+              %td
+                %strong.font-18 $228.32
+          %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
+  %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+
+

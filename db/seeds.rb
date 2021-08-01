@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-AuthorBook.delete_all
+
 Author.delete_all
 Review.delete_all
 Book.delete_all
@@ -53,8 +53,7 @@ used_book_titles = []
   used_book_titles.include?(title) ? title << "#{rand(1..5)}": used_book_titles << title
   Book.create(title: title,
               price: [5.99,10.99,15.99,20.99,35.99,99.99].sample,
-              quantity: 1,
-              description: FFaker::Book.description.join('. ')+ FFaker::Book.description.join('. '),
+              description: FFaker::Lorem.paragraphs.join('. ')+ FFaker::Lorem.paragraphs.join('. '),
               height: rand(7.5..10.0).floor(2),
               width: rand(4.5..5.5).floor(2),
               depth: rand(0.3..4.0).floor(2),

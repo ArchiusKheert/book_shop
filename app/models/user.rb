@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
                                  }
   has_many :reviews
+  has_many :orders
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -18,7 +19,7 @@ class User < ApplicationRecord
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.name = auth.info.name
-      user.image = auth.info.image
+      user.avatar = auth.info.image
       user.skip_confirmation!
     end
   end
