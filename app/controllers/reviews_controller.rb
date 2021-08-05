@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
 
     if @review.save
-      flash[:success] = 'Review was created'
+      flash[:success] = 'Review was uploaded. Waiting for admin checking'
     else
       flash[:danger] = @review.error.full_messages.join('. ')
     end
