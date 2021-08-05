@@ -7,13 +7,14 @@ class ApplicationController < ActionController::Base
 
 
   def current_order
-    return current_user.orders.in_progress.last || Order.new if user_signed_in?
-
-    if session[:order_id].nil?
-      Order.new
-    else
-      Order.find(session[:order_id]) || Order.new
-    end
+    current_order ||=
+      if session[:order_id]
+        Order.find(session[:order_id])
+      elsif user_signed_in?
+        user_orders = current_user.orders.in_progress
+        user_orders.empty? ? Order.new : user_orders.last
+      else
+        Order.new
+      end
   end
-
 end

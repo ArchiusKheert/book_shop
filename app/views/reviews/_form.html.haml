@@ -1,15 +1,16 @@
-= form_with(model: [ @book, @book.reviews.build ]) do |f|
+= form_for @book.reviews.build, url: @book.reviews_path(@book.id), method: :post, html: {class: 'width-70p'} do |f|
   .form-group
+    = f.hidden_field :book_id, value: @book.id
     = f.hidden_field :user_id, value: current_user.id
   .form-group.mb-30
 
-    = f.label :rating, class: "control-label input-label"
+    = f.label :rating, "Score", class: "control-label input-label"
     = f.number_field :rating, class: "form-control", max: 5, min: 1
   .form-group.mb-30
     = f.label :title, class: "control-label input-label"
     = f.text_area :title, class: "form-control"
   .form-group.mb-30
-    = f.label :text, class: "control-label input-label"
+    = f.label :text, "Review", class: "control-label input-label"
     = f.text_area :text, size: "60x6", class: "form-control"
   .actions
     = f.submit 'Post', class: "btn btn-default mb-20"

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[ show ]
   before_action :set_categories, only: %i[ index show ]
   before_action :set_current, only: %i[ index]
   # GET /books or /books.json
@@ -9,6 +9,7 @@ class BooksController < ApplicationController
              else
                Book.order(@sort_option).page params[:page]
              end
+    @order_item = OrderItem.new
 
   end
 
@@ -19,14 +20,15 @@ class BooksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-      @order_item = OrderItem.new
-    end
+
 
     # Only allow a list of trusted parameters through.
     def book_params
       params.require(:book).permit(:title, :price, :description, :height, :width, :depth, :year_of_publication, :materials)
+    end
+
+    def set_book
+      @book = Book.find(params[:id])
     end
 
   def set_categories

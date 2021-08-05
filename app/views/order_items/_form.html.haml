@@ -1,4 +1,6 @@
-= form_for @book.order_items.build, url: book_order_items_path(@book.id), method: :post do |form|
+= form_for @order_item, method: :post do |form|
+  .col-xs-12.col-md-4
+    %p.h1.in-gold-500.mt-10 = "$#{@book.price}"
   .col-xs-5.col-md-5
     .input-group.general-position
       %a.input-link.pt-7#minus{href: ""}
