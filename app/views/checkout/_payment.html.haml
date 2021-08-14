@@ -1,0 +1,52 @@
+%main.container.mb-res-50
+  %h1.general-title-margin Checkout
+  %ul.steps.list-inline
+    %li.steps.active
+      %span.step-number 1
+      %span.step-text.hidden-xs Address
+    %li.step-divider
+    %li.step
+      %span.step-number 2
+      %span.step-text.hidden-xs Delivery
+    %li.step-divider
+    %li.step
+      %span.step-number 3
+      %span.step-text.hidden-xs Payment
+    %li.step-divider
+    %li.step
+      %span.step-number 4
+      %span.step-text.hidden-xs Confirm
+    %li.step-divider
+    %li.step
+      %span.step-number 5
+      %span.step-text.hidden-xs Complete
+  %h3.general-subtitle Credit Card
+  %form.max-600.mb-80
+    .form-group.has-error
+      %label.control-label.input-label{for: "cardNumber"} Card Number
+      %input#cardNumber.form-control{type: "number", name: "cardnumber", placeholder: "Card Number"}
+      %span.help-block Please enter valid credit card number
+    .row
+      .col-sm-6
+        .form-group
+          %label.control-label.input-label{for: "ccName"} Name of credit card holder
+          %input#ccName.form-control{type: "text", name: "ccname", placeholder: "Name on Card"}
+      .col-sm-3
+        .form-group
+          %label.control-label.input-label{for: "expDate"} MM/YY
+          %input#expDate.form-control{type: "text", name: "exp-date", placeholder: "MM/YY"}
+      .col-sm-3
+        .form-group
+          %label.control-label.input-label{for: "cVV"} CVV
+          %input#cVV.form-control{type: "number", name: "cvv", placeholder: "***"}
+          %i.fa.fa-question-circle.general-form-help
+  .general-text-align
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table
+      %tr
+        %td
+          %strong.font-18 Subtotal:
+        %td
+          %strong.font-18 $24.99
+  .text-center
+    %button.btn.btn-default.mb-80 Save and Continue
