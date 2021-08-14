@@ -48,9 +48,9 @@ end
 
 used_book_titles = []
 
-300.times do
+300.times do |index|
   title = FFaker::Book.title
-  used_book_titles.include?(title) ? title << "#{rand(1..5)}": used_book_titles << title
+  used_book_titles.include?(title) ? title << "#{index}": used_book_titles << title
   Book.create(title: title,
               price: [5.99,10.99,15.99,20.99,35.99,99.99].sample,
               description: FFaker::Lorem.paragraphs.join('. ')+ FFaker::Lorem.paragraphs.join('. '),

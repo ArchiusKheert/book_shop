@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_125300) do
+ActiveRecord::Schema.define(version: 2021_08_14_135356) do
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -26,6 +26,22 @@ ActiveRecord::Schema.define(version: 2021_07_31_125300) do
     t.index ["author_id", "book_id"], name: "index_authorships_on_author_id_and_book_id"
     t.index ["author_id"], name: "index_authorships_on_author_id"
     t.index ["book_id"], name: "index_authorships_on_book_id"
+  end
+
+  create_table "billing_addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.string "zip"
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id", null: false
+    t.integer "user_id", null: false
+    t.index ["order_id"], name: "index_billing_addresses_on_order_id"
+    t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -45,6 +61,30 @@ ActiveRecord::Schema.define(version: 2021_07_31_125300) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "number"
+    t.string "name_on_card"
+    t.string "month"
+    t.string "year"
+    t.string "cvv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.string "method"
+    t.string "days"
+    t.decimal "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.text "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -83,6 +123,22 @@ ActiveRecord::Schema.define(version: 2021_07_31_125300) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.string "zip"
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id", null: false
+    t.integer "user_id", null: false
+    t.index ["order_id"], name: "index_shipping_addresses_on_order_id"
+    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -111,10 +167,14 @@ ActiveRecord::Schema.define(version: 2021_07_31_125300) do
 
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
+  add_foreign_key "billing_addresses", "orders"
+  add_foreign_key "billing_addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
+  add_foreign_key "shipping_addresses", "orders"
+  add_foreign_key "shipping_addresses", "users"
 end
