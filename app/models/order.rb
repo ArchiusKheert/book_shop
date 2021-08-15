@@ -17,6 +17,8 @@ class Order < ApplicationRecord
   scope :delivered, -> { where status: 'delivered'}
   scope :canceled, -> { where status: 'canceled'}
 
+
+
   private
 
   def set_number
