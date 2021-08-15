@@ -1,0 +1,35 @@
+%main.container.general-main-wrap
+  .row
+    .col-md-6.col-xs-12.mb-40
+      .text-center
+        %h3.general-subtitle.mt-0 Returning Customer
+          %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
+            %i.fa.fa-facebook-official
+          %p.general-login-text or
+        = form_for(User.new, url: user_session_path, html: {class: 'general-form'}) do |f|
+          .form-group.mb-40
+            %p.fw-600 Log In
+            = f.label :email, 'Enter E-mail', class: 'control-label input-label'
+            = f.email_field :email, placeholder: 'Enter E-mail', autofocus: true, class: 'form-control'
+          .form-group.mb-40
+            = f.label :password, class: 'control-label input-label'
+            = f.password_field :password, placeholder: 'Password', class: 'form-control'
+            %a.help-block.in-gold-500{href: new_user_password_path} Forgot Password?
+          .actions
+            = f.submit 'Log in', class: 'btn btn-default mb-20'
+    .col-md-6.col-xs-12.mb-40
+      .text-center
+        %h3.general-subtitle.mt-0 New Customer
+        %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
+          %i.fa.fa-facebook-official
+        %p.general-login-text or
+      = form_for(User.new, url: user_registration_path, html: {class: 'general-form'}) do |f|
+        .form-group.mb-40
+          %p.general-login-title.mb-5 Quick Register (you can change your password lately)
+          = f.label :email, 'Enter E-mail', class: 'control-label input-label'
+          = f.email_field :email, placeholder: 'Enter E-mail', class: 'form-control'
+          - password = Devise.friendly_token
+          = f.hidden_field :password, value: password
+          = f.hidden_field :password_confirmation, value: password
+        .actions
+          = f.submit 'Continue to Checkout', class: 'btn btn-default mb-20'

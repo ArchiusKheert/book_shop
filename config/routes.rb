@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
   resources :orders
   resources :order_items, only: [:create, :destroy]
+
+  resources :checkout_w
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
 
