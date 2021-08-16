@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   has_one :delivery
   has_one :credit_card
 
-  accepts_nested_attributes_for :billing_address
-  accepts_nested_attributes_for :shipping_address
+  #accepts_nested_attributes_for :billing_address
+  #accepts_nested_attributes_for :shipping_address
 
 
   after_create :set_number, :set_status
