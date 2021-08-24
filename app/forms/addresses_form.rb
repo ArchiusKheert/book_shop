@@ -65,8 +65,9 @@ class AddressesForm
   end
 
   def valid?
-    billing.valid?
+
     shipping.valid?
+    billing.valid? && shipping.valid?
   end
 
   def params_for(type)

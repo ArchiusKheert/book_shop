@@ -1,34 +1,43 @@
 class CheckoutController < ApplicationController
   include Wicked::Wizard
 
-  steps :login, :address, :delivery, :payment, :confirm, :complete
+  steps :login, :addresses, :delivery, :payment, :confirm, :complete
 
   def show
-    return redirect_to catalog_path if no_items_in_cart?
-    send("show_#{step}") unless step == 'wicked_finish'
+    case step
+    when :login then login
+    when :addresses then show_addresses
+    when :delivery then show_delivery
+    when :payment then show_payment
+    when :confirm then show_confirm
+    when :complete then show_complete
+
+    end
+
     render_wizard
   end
 
-
   def update
-    send("update_#{step}")
+    case step
+    when :addresses then update_addresses
+    when :delivery then updatedelivery
+    when :payment then update_payment
+    when :confirm then update_confirm
+    when :complete then update_complete
+    end
     redirect_to next_wizard_path unless performed?
-
   end
 
   private
 
-  def no_items_in_cart?
-    current_order.order_items.empty? && step != :complete
-  end
 
-  def show_login
+  def login
     return jump_to(next_step) if user_signed_in?
-    cookies[:from_checkout] = { value: true, expires: 1.day.from_now}
+    cookies[:from_checkout] = { value: true, expires: 1.day.from_now }
   end
 
-  def show_address
-    @addresses = AddressForm.new(show_addresses_params)
+  def show_addresses
+    @addresses = AddressesForm.new(show_addresses_params)
   end
 
   def show_delivery
@@ -37,7 +46,7 @@ class CheckoutController < ApplicationController
   end
 
   def show_payment
-    return jump_to(previous_step) unless current_order.delivery
+    return jump_to(previouts_step) unless current_order.delivery
     @credit_card = current_order.credit_card || CreditCard.new
   end
 
@@ -51,24 +60,16 @@ class CheckoutController < ApplicationController
     @order = current_user.orders.processing_order.decorate
   end
 
-  def fast_authentification!
-    return unless user_signed_in? && step != :login
-    jump_to(:login) unless user_signed_in?
-  end
 
-  def show_addresses_params
-    return {user_id: current_user.id} if current_order.addresses.empty?
-    { order_id: current_order.id}
-  end
-
-  def update_address
-    @addresses = AddressForm.new(addresses_params)
+  # update
+  def update_addresses
+    @addresses = AddressesForm.new(addresses_params)
     render_wizard unless @addresses.save
   end
 
   def update_delivery
     current_order.update_attributes(order_params)
-    flash[:notice] = t('delivery.pickup') if current_order.delivery_id.nil?
+    flash[:notice] = 'Please choose delivery method.' if current_order.delivery_id.nil?
   end
 
   def update_payment
@@ -86,11 +87,18 @@ class CheckoutController < ApplicationController
   end
 
   def credit_card_params
-    params.require(:credit_card).permit(:number, :name, :mm_yy, :cvv)
+    params.require(:credit_card).permit(:number, :name_on_card, :month, :year, :cvv)
   end
 
   def addresses_params
     params.require(:addresses_form)
   end
+
+  def show_addresses_params # take data from settings if persist
+    return { user_id: current_user.id } if current_order.addresses.empty?
+    { order_id: current_order.id }
+  end
+
+
 
 end
