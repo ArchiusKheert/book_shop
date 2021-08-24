@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_14_141114) do
+ActiveRecord::Schema.define(version: 2021_08_23_122644) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.string "zip"
+    t.string "phone"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "order_id", null: false
+    t.index ["order_id"], name: "index_addresses_on_order_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -26,22 +43,6 @@ ActiveRecord::Schema.define(version: 2021_08_14_141114) do
     t.index ["author_id", "book_id"], name: "index_authorships_on_author_id_and_book_id"
     t.index ["author_id"], name: "index_authorships_on_author_id"
     t.index ["book_id"], name: "index_authorships_on_book_id"
-  end
-
-  create_table "billing_addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "country"
-    t.string "zip"
-    t.string "phone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "order_id", null: false
-    t.integer "user_id", null: false
-    t.index ["order_id"], name: "index_billing_addresses_on_order_id"
-    t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -76,8 +77,8 @@ ActiveRecord::Schema.define(version: 2021_08_14_141114) do
   end
 
   create_table "deliveries", force: :cascade do |t|
-    t.string "method"
-    t.string "days"
+    t.string "name"
+    t.string "time"
     t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -108,6 +109,8 @@ ActiveRecord::Schema.define(version: 2021_08_14_141114) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "checkout_step"
+    t.integer "delivery_id", null: false
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -122,22 +125,6 @@ ActiveRecord::Schema.define(version: 2021_08_14_141114) do
     t.string "status", default: "unprocessed"
     t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "shipping_addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "country"
-    t.string "zip"
-    t.string "phone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "order_id", null: false
-    t.integer "user_id", null: false
-    t.index ["order_id"], name: "index_shipping_addresses_on_order_id"
-    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -166,16 +153,15 @@ ActiveRecord::Schema.define(version: 2021_08_14_141114) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "orders"
+  add_foreign_key "addresses", "users"
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
-  add_foreign_key "billing_addresses", "orders"
-  add_foreign_key "billing_addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
-  add_foreign_key "shipping_addresses", "orders"
-  add_foreign_key "shipping_addresses", "users"
 end

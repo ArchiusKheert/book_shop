@@ -11,8 +11,9 @@ class User < ApplicationRecord
                                  }
   has_many :reviews
   has_many :orders
-  has_one :shipping_address
-  has_one :billing_address
+  has_many :addresses
+  has_one :billing
+  has_one :shipping
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

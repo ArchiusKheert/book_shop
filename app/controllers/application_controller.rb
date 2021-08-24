@@ -22,6 +22,13 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def afrer_sign_in_path_for(resource)
+    if cookies[:from_checkout]
+      cookies.delete :from_checkout
+      checkout_path(:addresses)
+    end
+  end
+=begin
   def after_sign_in_path_for(resource)
     if request.env['omniauth.origin']
       request.env['omniauth.origin'] || stored_location_for(resource) || root_path
@@ -38,4 +45,5 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(resource)
     after_sign_in_path_for(resource)
   end
+=end
 end

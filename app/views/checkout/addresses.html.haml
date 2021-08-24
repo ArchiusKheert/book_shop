@@ -1,0 +1,37 @@
+%main.container.general-main-wrap
+  = simple_form_for @addresses, url: wizard_path, method: :put do |f|
+    .row
+      .col-md-6.col-xl-12
+        = f.fields_for @addresses.billing do |b|
+          = b.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden'}
+          = b.input :order_id, label: false, input_html: { value: current_order.id, type: 'hidden'}
+          = b.input :first_name
+          = b.input :last_name
+          = b.input :address
+          = b.input :city
+          = b.input :country
+          = b.input :zip
+          = b.input :phone
+
+      .col-md-6.col-xl-12
+        = f.fields_for @addresses.shipping do |s|
+          = s.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden'}
+          = s.input :order_id, label: false, input_html: { value: current_order.id, type: 'hidden'}
+          = s.input :first_name
+          = s.input :last_name
+          = s.input :address
+          = s.input :city
+          = s.input :country
+          = s.input :zip
+          = s.input :phone
+
+
+          .form-group.checkbox
+            %label.checkbox-label
+              = f.check_box :use_billing, class: 'checkbox-input', id: 'use_billing', hidden: true
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text = 'Use billing'
+      = f.submit "Save and Continue", class: 'btn btn-default mb-20'
+
+-#= link_to "Save and Continue", next_wizard_path, class: 'btn btn-default mb-20'

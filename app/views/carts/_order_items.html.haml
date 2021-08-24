@@ -1,0 +1,27 @@
+%table.table.table-hover
+  %tr.no-hover
+    %th.col-pic.pl-0
+      %span.in-grey-600 Product
+    %th.col-title
+    %th.col-price
+      %span.in-grey-600 Price
+    %th.col-quantity
+      %span.in-grey-600 Quantity
+    %th.col-total
+      %span.in-grey-600 Subtotal
+  - @order_items.each do |order_item|
+    %tr
+      %td
+        .general-img-wrap-table
+          %img.cart-img-shadow.pull-left{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+      %td
+        %p.title = order_item.book.title
+      %td
+        %span.font-16.in-gold-500 = "$#{order_item.book.price}"
+      %td
+        = render 'quantity', order_item: order_item
+      %td
+        %span.font-16.in-gold-500 = "$#{order_item.book.price * order_item.quantity}"
+      %td
+        %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+          %span{'aria-hidden': "true"}&times;
