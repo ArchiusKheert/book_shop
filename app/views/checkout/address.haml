@@ -1,25 +1,49 @@
-%main.container.general-main-wrap
-  .row
-    .col-md-6.col-xl-12
-      = simple_form_for @form_b, url: wizard_path do |f|
-        = f.input :user_id, label: false, input_html: {value: @user.id, type: 'hidden'}
-        = f.input :first_name
-        = f.input :last_name
-        = f.input :address
-        = f.input :city
-        = f.input :country
-        = f.input :zip
-        = f.input :phone
-        = f.submit
-    .col-md-6.col-xl-12
-      = simple_form_for @form_s, url: wizard_path do |f|
-        = f.input :user_id, label: false, input_html: {value: @user.id, type: 'hidden'}
-        = f.input :first_name
-        = f.input :last_name
-        = f.input :address
-        = f.input :city
-        = f.input :country
-        = f.input :zip
-        = f.input :phone
-        = f.submit
-= link_to "Save and Continue", next_wizard_path, class: 'btn btn-default mb-20'
+%main.container
+  %h1.general-title-margin Checkout
+  = render 'steps'
+  = simple_form_for @addresses, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle Billing Address
+          %p.general-info-text all fields are required
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle Shipping Address
+      .row
+        .col-md-5.mb-40
+          .visible-xs.visible-sm
+            %h3.general-subtitle Billing Address
+            %p.general-info-text all fields are required
+          = form.fields_for @addresses.billing do |b|
+            = b.input :user_id, label: false, input_html: {value: current_user.id, type: 'hidden' }
+            = b.input :order_id, label: false, input_html: {value: current_order.id, type: 'hidden'}
+            = b.input :first_name, required: false
+            = b.input :last_name, required: false
+            = b.input :address, required: false
+            = b.input :city, required: false
+            = b.input :zip, required: false
+            = b.input :country, required: false, prompt: "Select country"
+            = b.input :phone, required: false, prompt: "Example 8 800 555 35 35"
+        .col-md-5.col-md-offset-1.mb-60
+          .visible-xs.visible-sm
+            %h3.general-subtitle Shipping Address
+          = form.fields_for @addresses.shipping do |s|
+            = s.input :user_id, label: false, input_html: {value: current_user.id, type: 'hidden' }
+            = s.input :order_id, label: false, input_html: {value: current_order.id, type: 'hidden'}
+            = s.input :first_name, required: false
+            = s.input :last_name, required: false
+            = s.input :address, required: false
+            = s.input :city, required: false
+            = s.input :zip, required: false
+            = s.input :country, required: false, prompt: "Select country"
+            = s.input :phone, required: false, prompt: "Example 8 800 555 35 35"
+          .form-group.checkbox
+            %label.checkbox-label
+              = form.check_box :use_billing, class: 'checkbox-input', id: 'use_billing', hidden: true
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text = 'Use Billing Address'
+      .general-text-align.mb-60
+        = render 'order_summary'
+      .actions.text-center
+        = form.submit "Save and Continue", class: 'btn btn-default mb-20'

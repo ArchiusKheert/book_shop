@@ -1,0 +1,18 @@
+%p.in-gold-500.font-18 Order Summary
+%table.general-summary-table
+  %tr
+    %td
+      %p.font-16 Item Total:
+    %td
+      %p.font-16 $228.32
+  - if step_done?(:delivery) || step_active?(:delivery)
+    %tr
+      %td
+        %p.font-16 Shipping:
+      %td
+        %p.font-16 =number_to_dollar(current_order.delivery.price)
+  %tr
+    %td
+      %strong.font-18 Order Total:
+    %td
+      %strong.font-18 $228.32

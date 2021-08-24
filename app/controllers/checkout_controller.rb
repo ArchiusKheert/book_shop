@@ -1,7 +1,7 @@
 class CheckoutController < ApplicationController
   include Wicked::Wizard
 
-  steps :login, :addresses, :delivery, :payment, :confirm, :complete
+  steps :login, :address, :delivery, :payment, :confirm, :complete
 
   def show
     return redirect_to catalog_path if no_items_in_cart?
@@ -27,7 +27,7 @@ class CheckoutController < ApplicationController
     cookies[:from_checkout] = { value: true, expires: 1.day.from_now}
   end
 
-  def show_addresses
+  def show_address
     @addresses = AddressForm.new(show_addresses_params)
   end
 
@@ -52,7 +52,7 @@ class CheckoutController < ApplicationController
   end
 
   def fast_authentification!
-    return unless user_signed_in? and step != :login
+    return unless user_signed_in? && step != :login
     jump_to(:login) unless user_signed_in?
   end
 
@@ -61,7 +61,7 @@ class CheckoutController < ApplicationController
     { order_id: current_order.id}
   end
 
-  def update_addresses
+  def update_address
     @addresses = AddressForm.new(addresses_params)
     render_wizard unless @addresses.save
   end

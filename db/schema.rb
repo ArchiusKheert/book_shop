@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_122644) do
+ActiveRecord::Schema.define(version: 2021_08_24_101422) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "first_name"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 2021_08_23_122644) do
     t.string "cvv"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id", null: false
+    t.index ["order_id"], name: "index_credit_cards_on_order_id"
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -158,6 +160,7 @@ ActiveRecord::Schema.define(version: 2021_08_23_122644) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "credit_cards", "orders"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "deliveries"
