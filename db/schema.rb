@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_101422) do
+ActiveRecord::Schema.define(version: 2021_11_29_182544) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "first_name"
@@ -67,15 +67,14 @@ ActiveRecord::Schema.define(version: 2021_08_24_101422) do
   end
 
   create_table "credit_cards", force: :cascade do |t|
-    t.string "number"
+    t.integer "number"
     t.string "name_on_card"
-    t.string "month"
-    t.string "year"
+    t.string "month_year"
     t.string "cvv"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "order_id", null: false
-    t.index ["order_id"], name: "index_credit_cards_on_order_id"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -112,6 +111,8 @@ ActiveRecord::Schema.define(version: 2021_08_24_101422) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "checkout_step"
     t.integer "delivery_id", null: false
+    t.integer "credit_card_id", null: false
+    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -160,9 +161,10 @@ ActiveRecord::Schema.define(version: 2021_08_24_101422) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "credit_cards", "orders"
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "credit_cards"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"

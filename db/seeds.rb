@@ -11,6 +11,7 @@ Author.delete_all
 Review.delete_all
 Book.delete_all
 Category.delete_all
+Delivery.delete_all
 
 
 10.times do
@@ -79,5 +80,13 @@ books.each do |book|
                    user_id: user.sample.id)
   end
 end
+
+
+Delivery.create(name: 'Delivery next day', time: '3 to 7 days', price: 5.00)
+Delivery.create(name: 'Pick up In-Store', time: '5 to 20 days', price: 10.00)
+Delivery.create(name: 'Express', time: '2 to 3 days', price: 15.00)
+
+
+
 
 

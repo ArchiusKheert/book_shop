@@ -119,16 +119,9 @@
           %td
             %span.font-16.in-gold-500 $19.99
   .text-center.general-text-right
-    %p.in-gold-500.font-18 Order Summary
-    %table.general-summary-table.general-summary-table-right.general-text-right
-      %tr
-        %td
-          %strong.font-18 Subtotal
-        %td
-          %strong.font-18 $39.98
+    = render 'order_summary'
   .text-center
-    -#%button.btn.btn-default.mb-20 Place Order
-    = link_to "Place Order", next_wizard_path, class: "btn btn-default mb-20"
+    = button_to "Place order", wizard_path, method: :put, class: 'btn btn-default mb-20'
 
 
 

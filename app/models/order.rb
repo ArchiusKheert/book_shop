@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
+  belongs_to :credit_card, optional: true
 
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
@@ -22,7 +23,9 @@ class Order < ApplicationRecord
   scope :delivered, -> { where status: 'delivered'}
   scope :canceled, -> { where status: 'canceled'}
 
-
+  def place_in_queue
+    update(status: 'in_queue')
+  end
 
   private
 
