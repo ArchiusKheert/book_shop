@@ -27,6 +27,10 @@ class Order < ApplicationRecord
     update(status: 'in_queue')
   end
 
+  def sub_total
+    order_items.to_a.sum(&:total)
+  end
+
   private
 
   def set_number
