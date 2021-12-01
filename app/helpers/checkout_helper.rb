@@ -13,8 +13,8 @@ module CheckoutHelper
     past_step?(current_step)
   end
 
-  def shipping_price
-    return number_to_dollar 0.00 unless current_order.delivery
-    number_to_dollar current_order.delivery.price
+  def shipping_price(order)
+    return number_to_dollar 0.00 unless order.delivery
+    number_to_dollar order.delivery.price
   end
 end

@@ -20,7 +20,7 @@ class CheckoutController < ApplicationController
   def update
     case step
     when :addresses then update_addresses
-    when :delivery then updatedelivery
+    when :delivery then update_delivery
     when :payment then update_payment
     when :confirm then update_confirm
     when :complete then update_complete
@@ -57,7 +57,7 @@ class CheckoutController < ApplicationController
 
   def show_complete
     return jump_to(previous_step) unless flash[:complete_order]
-    @order = current_user.orders#.processing_order.decorate
+    @order = current_user.orders.in_queue.last#.processing_order.decorate
   end
 
 

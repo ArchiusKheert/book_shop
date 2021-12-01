@@ -7,79 +7,73 @@
     .row.mb-20
       .col-sm-6
         .visible-xs
-          %p.general-order-number.mb-40 Order #BS228
-          %p.general-address January 1, 2000
+          %p.general-order-number.mb-40 = "Order #{@order.number}"
+          %p.general-address = @order.completed_at.strftime("%B %-d, %Y")
         %p.general-address
-          Jack Jones
-          %span.general-edit edit
+          = "#{@order.shipping.first_name} #{@order.shipping.last_name}"
           %br
-          3333
+          = @order.shipping.address
           %br
-          1111
+          = "#{@order.shipping.city} #{@order.shipping.zip}"
           %br
-          2222
+          = @order.shipping.country
           %br
-          4444
+          = "Phone #{@order.shipping.phone}"
       .col-sm-6.hidden-xs.text-right
-        %p.general-order-number.mb-0 Order #BS228
-        %p.general-address.mb-30 January 1, 2000
-    .visible-xs
+        %p.general-order-number.mb-0 = "Order #{@order.number}"
+        %p.general-address.mb-30 = @order.completed_at.strftime("%B %-d, %Y")
+  .visible-xs
+    - @order.order_items.each do |oi|
       .general-cart-item.divider-lg
         .general-img-wrap-table
-          %img.cart-img-shadow{src: 'https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg', alt: "design-book"}
-        %p.title Harry Potter and Philosopher's Stone
-        %p.in-grey-600.fw-300 Story about little magician....
-        %table.table
+          %img.cart-img-shadow{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+        %p.title = oi.book.title
+        %table
           %tr
             %td
               %span.in-grey-600 Price
             %td
-              %span.font-16.in-gold-500 $19.99
+              %span.font-16.in-gold-500 = number_to_dollar oi.book.price
           %tr
             %td.vertical-middle
               %span.in-grey-600 Quantity
             %td
-              %span 1
+              %span = oi.quantity
           %tr
             %td
               %span.in-grey-600 Subtotal
             %td
-              %span.font-16.in-gold-500 $19.99
-    .hidden-xs.divider-lg.pt-20
-      %table.table.table-hover
-        %thead
-          %tr
-            %th
-              %span.in-grey-600 Book
-            %th.col-method
-            %th
-              %span.in-grey-600 Price
-            %th
-              %span.in-grey-600 Quantity
-            %th
-              %span.in-grey-600 Total
+              %span.font-16.in-gold-500 = number_to_dollar oi.total
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600 Book
+          %th.col-method
+          %th
+            %span.in-grey-600 Price
+          %th
+            %span.in-grey-600 Quantity
+          %th
+            %span.in-grey-600 Total
       %tbody
-        %tr
-          %td
-            .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: 'https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg', alt: "design-book"}
-          %td
-            %p.title HP and PS
-            %p.in-grey-600.fw-300 Description
-          %td
-            %span.font-16.in-gold-500 $19.99
-          %td
-            %span.ml-30 1
-          %td
-            %span.font-16.in-gold-500 $19.99
+        - @order.order_items.each do |oi|
+          %tr
+            %td
+              .general-img-wrap-table
+                %img.cart-img-shadow.pull-left{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+            %td
+              %p.title= oi.book.title
+              %p.in-grey-600.fw-300 HP and PS
+            %td
+              %span.font-16.in-gold-500= number_to_euro oi.book.price
+            %td
+              %span.ml-30= oi.quantity
+            %td
+              %span.font-16.in-gold-500= number_to_euro oi.total
     .text-center.general-text-right
-      %p.in-gold-500.font-18 Order Summary
-      %table.general-summary-table.general-summary-table-right.general-text-right
-        %tr
-          %td
-            %p.font-16 Order Total:
-          %td
-            %p.font-16 $39.98
+      = render 'order_summary', order: @order
     .text-center
       -#%button.btn.btn-default.mb-20 Back to Store
       = link_to "Back to Store", root_path, class: "btn btn-default mb-20"

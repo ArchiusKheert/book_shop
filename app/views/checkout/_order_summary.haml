@@ -2,14 +2,14 @@
   %td
     %p.font-16 Item Total:
   %td
-    %p.font-16 = number_to_dollar current_order.sub_total
+    %p.font-16 = number_to_dollar order.sub_total
 %tr
   %td
     %p.font-16 Shipping Price
   %td
-    %p.font-16 = shipping_price
+    %p.font-16 = shipping_price(order)
 %tr
   %td
     %strong.font-18 Order Total
   %td
-    %strong.font-18 = number_to_dollar current_order.total
+    %strong.font-18 = number_to_dollar order.total
