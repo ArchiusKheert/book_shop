@@ -3,6 +3,8 @@ class CheckoutController < ApplicationController
 
   steps :login, :addresses, :delivery, :payment, :confirm, :complete
 
+  before_action :assign_order_to_user
+
   def show
     case step
     when :login then login
@@ -29,6 +31,10 @@ class CheckoutController < ApplicationController
   end
 
   private
+
+  def assign_order_to_user
+    current_order.update_attributes(user_id: current_user.id) if current_order.user_id.nil?
+  end
 
 
   def login
@@ -80,6 +86,7 @@ class CheckoutController < ApplicationController
 
   def update_confirm
     flash[:complete_order] = true
+    current_order.update_attribute(user_id: current_user.id)
     current_order.place_in_queue
     session[:order_id] = nil if current_order.status == 'in_queue'
   end
