@@ -6,18 +6,18 @@ class ApplicationController < ActionController::Base
   private
 
 
-  def current_order
-    current_order ||=
+  def current_order(complete_checkout = nil)
+    c_order ||=
       if session[:order_id]
         Order.find(session[:order_id])
-      elsif user_signed_in?
-        user_orders = current_user.orders.in_progress
-        user_orders.empty? ? Order.new : user_orders.last
+      elsif user_signed_in? && current_user.orders.find_by(status: 'in_progress').present?
+        current_user.orders.find_by(status: 'in_progress')
       else
         Order.new
       end
 
-    current_order
+    return nil if complete_checkout == 'complete'
+    c_order
   end
 
   protected
@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
     if cookies[:from_checkout]
       cookies.delete :from_checkout
       checkout_path(:addresses)
+    else
+      super
     end
   end
 =begin

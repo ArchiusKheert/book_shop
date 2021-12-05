@@ -1,0 +1,93 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin = "Order #{@order.number}"
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle.mt-0 Shipping Address
+      %p.general-address
+        = "#{@order.shipping.first_name} #{@order.shipping.last_name}"
+        %br
+        = @order.shipping.address
+        %br
+        = "#{@order.shipping.city} #{@order.shipping.zip}"
+        %br
+        = @order.shipping.country
+        %br
+        = "Phone #{@order.shipping.phone}"
+    .col-sm-3
+      %h3.general-subtitle.mt-0 Billing Address
+      %p.general-address
+        = "#{@order.billing.first_name} #{@order.billing.last_name}"
+        %br
+        = @order.billing.address
+        %br
+        = "#{@order.billing.city} #{@order.billing.zip}"
+        %br
+        = @order.billing.country
+        %br
+        = "Phone #{@order.billing.phone}"
+    .col-sm-3
+      %h3.general-subtitle.mt-0 Shipments
+      %p.general-address
+        = @order.delivery.name
+        %br
+        = @order.delivery.time
+    .col-sm-3
+      %h3.general-subtitle.mt-0 Payments information
+      %p.general-address
+        = "**** **** **** #{@order.credit_card.last(4)}"
+        %br
+        = @order.credit_card.month_year
+  .visible-xs
+    - @order.order_items.each do |oi|
+      .general-cart-item.divider-lg
+        .general-img-wrap-table
+          %img.cart-img-shadow{scr: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+        %p.title = oi.book.title
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600 Price
+            %td
+              %span.font-16.in-gold-500 = number_to_dollar oi.book.price
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600 Quantity
+            %td
+              %span = oi.quantity
+          %tr
+            %td
+              %span.in-grey-600 SubTotal
+            %td
+              %span.fon-16.in-gold-500 = number_to_dollar oi.total
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600 Book
+          %th.col-method
+          %th
+            %span.in-grey-600 Price
+          %th
+            %span.in-grey-600 Quantity
+          %th
+            %span.in-grey-600 Total
+      %tbody
+        - @order.order_items.each do |oi|
+          %tr
+            %td
+              .general-img-wrap-table
+                %img.cart-img-shadow.pull-left{scr: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+            %td
+              %p.title = oi.book.title
+              %p.in-grey-600.fw-300 HP and PS
+            %td
+              %span.font-16.in-gold-500 = number_to_dollar oi.book.price
+            %td
+              %span.ml-30 = oi.quantity
+            %td
+              %span.font-16.in-gold-500 = number_to_dollar oi.total
+  .text-center.general-text-right
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render "checkout/order_summary", order: @order
