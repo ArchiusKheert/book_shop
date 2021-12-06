@@ -89,7 +89,7 @@
                 %img.cart-img-shadow{src: 'https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg', alt: "design-book"}
             %td
               %p.title = order_item.book.title
-              %p.in-grey-600.fw-300 HP an PS
+              %p.in-grey-600.fw-300 = order_item.book.description.split('.').first
             %td
               %span.font-16.in-gold-500 = number_to_dollar order_item.book.price
             %td

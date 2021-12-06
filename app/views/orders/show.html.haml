@@ -80,7 +80,7 @@
                 %img.cart-img-shadow.pull-left{scr: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
             %td
               %p.title = oi.book.title
-              %p.in-grey-600.fw-300 HP and PS
+              %p.in-grey-600.fw-300 = oi.book.description.split('.').first
             %td
               %span.font-16.in-gold-500 = number_to_dollar oi.book.price
             %td
