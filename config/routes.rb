@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'catalog', to: 'books#index'
   get 'settings/addresses', to: 'addresses#index'
   post 'settings/addresses', to: 'addresses#create'
+  put 'settings/addresses', to: 'addresses#update'
   get 'settings/privacy', to: 'users#index'
   put 'settings/privacy', to: 'users#update'
 
@@ -24,5 +25,6 @@ Rails.application.routes.draw do
 
 
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users,
+             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

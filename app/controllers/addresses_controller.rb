@@ -10,6 +10,13 @@ class AddressesController < ApplicationController
     render :index
   end
 
+  def update
+    @addresses = AddressesForm.new(addresses_params)
+    @addresses.save
+
+    render :index
+  end
+
   private
 
   def addresses_params
