@@ -37,7 +37,7 @@ class CheckoutController < ApplicationController
     @order = Order.create(order_items_ids: session[:cart],
                           user_id: current_user.id)
     session[:order_id] = @order.id
-    session[:cart] = nil
+
   end
 
 
@@ -91,10 +91,9 @@ class CheckoutController < ApplicationController
 
   def update_confirm
     session[:order_complete] = true
-    #current_order.update_attribute(user_id: current_user.id)
     current_order.place_in_queue
-    session[:order_id] = nil #if current_order.status == 'in_queue'
-    #current_order('complete')
+    session[:order_id] = nil
+    session[:cart_id] = nil
   end
 
   def order_params
