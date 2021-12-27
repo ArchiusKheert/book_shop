@@ -21,27 +21,11 @@
               %h3.general-subtitle Billing Address
               %p.general-info-text all fields are required
             = f.fields_for @addresses.billing do |b|
-              = b.input :user_id, label: false, input_html: {value: current_user.id, type: 'hidden'}
-              = b.input :order_id, label: false, input_html: {value: current_order.id, type: 'hidden'}
-              = b.input :first_name, required: false
-              = b.input :last_name, required: false
-              = b.input :address, required: false
-              = b.input :city, required: false
-              = b.input :zip, required: false
-              = b.input :country, required: false, prompt: "Select country"
-              = b.input :phone, required: false, placeholder: "Example 8 800 555 35 35"
+              = render 'form_fields', f: b
           .col-md-5.mb-60.col-md-offset-1
             .visible-xs.visible-sm
               %h3.general-subtitle Shipping Address
             = f.fields_for @addresses.shipping do |s|
-              = s.input :user_id, label: false, input_html: {value: current_user.id, type: 'hidden'}
-              = s.input :order_id, label: false, input_html: {value: current_order.id, type: 'hidden'}
-              = s.input :first_name, required: false
-              = s.input :last_name, required: false
-              = s.input :address, required: false
-              = s.input :city, required: false
-              = s.input :zip, required: false
-              = s.input :country, required: false, prompt: "Select country"
-              = s.input :phone, required: false, placeholder: "Example 8 800 555 35 35"
+              = render 'form_fields', f: s
       .actions.text-center
         = f.submit "Save", class: 'btn btn-default mb-20'
