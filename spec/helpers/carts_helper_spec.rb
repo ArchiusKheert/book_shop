@@ -10,6 +10,18 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe CartsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe CartsController, type: :controller do
+  describe 'GET #show' do
+    before { get :show}
+
+    it 'assign @order' do
+      expect(assigns(:order)).not_to be_nil
+    end
+
+    it 'return success response with show template' do
+      expect(response.status).to eq(200)
+      expect(response).to render_template :show
+    end
+
+  end
 end

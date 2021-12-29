@@ -1,14 +1,32 @@
 FactoryBot.define do
   factory :book do
-    title {FFaker::Book.title}
-    price {[5.99,10.99,15.99,20.99,35.99,99.99].sample}
+    transient do
+      cost 99.99
+      category_name {FactoryBot.create(:category).id}
+    end
+    price 1.0
+    sequence(:title) { |i| FFaker::Book.title + i.to_s}
     description {FFaker::Book.description}
-    height { "9.99" }
-    width { "9.99" }
-    depth { "9.99" }
-    year_of_publication {FFaker::Vehicle.year}
-    materials {FFaker::Lorem.words.join(', ')}
-    authors {[]}
-    reviews {[]}
+    year_of_publication 2021
+    height 1.1
+    width 2.0
+    depth 0.8
+    materials 'paper, silk'
+    category
+
+    before(:create) do |book, evaluator|
+      book.category_id = (Category.find_by(name: evaluator.category_name) ||
+        FactoryBot.create(:category, name: evaluator.category_name)).id
+    end
+
+    after(:create) do |book, evaluator|
+      book.price = evaluator.price
+    end
+
+    factory :book_with_review do
+      after(:create) do |book, evaluator|
+        create_list(:review, 3, book_id: book.id)
+      end
+    end
   end
 end

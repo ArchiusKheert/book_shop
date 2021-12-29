@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:success] = 'Review was uploaded. Waiting for admin checking'
     else
-      flash[:danger] = @review.error.full_messages.join('. ')
+      flash[:danger] = @review.error.full_messages.join('. ').gsub('Text', 'Review')
     end
 
     redirect_back(fallback_location: root_path)

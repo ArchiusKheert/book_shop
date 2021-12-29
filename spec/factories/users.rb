@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
 
-    email {FFaker::Internet.safe_email}
-    name { 'User Name'}
+    sequence(:email) { |i| "email#{i}@email.com"}
+    name { 'Archius Kheert'}
     password { 'test1234TEST' }
   end
 end

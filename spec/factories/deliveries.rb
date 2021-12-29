@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :delivery do
-    #method { "MyString" }
-    days { "MyString" }
-    price { "9.99" }
+    sequence(:name) {|i| "Delivery#{i}"}
+    time '1 to 2 days'
+    price 9.99
   end
 end
