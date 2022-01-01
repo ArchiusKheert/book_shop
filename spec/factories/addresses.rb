@@ -7,7 +7,7 @@ FactoryBot.define do
     city {FFaker::Address.city.gsub(/[\W_]/,'')}
     zip {FFaker::AddressUS.zip_code}
     country {FFaker::Address.country.gsub(/[\W_]/,'')}
-    phone '88005553535'
+    phone { '88005553535' }
     user
     order
   end
