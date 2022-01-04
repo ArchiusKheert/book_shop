@@ -1,17 +1,17 @@
 FactoryBot.define do
   factory :book do
     transient do
-      cost 99.99
+      cost { 99.99 }
       category_name {FactoryBot.create(:category).id}
     end
-    price 1.0
+    price { 1.0 }
     sequence(:title) { |i| FFaker::Book.title + i.to_s}
     description {FFaker::Book.description}
-    year_of_publication 2021
-    height 1.1
-    width 2.0
-    depth 0.8
-    materials 'paper, silk'
+    year_of_publication { 2021 }
+    height { 1.1 }
+    width { 2.0 }
+    depth { 0.8 }
+    materials { 'paper, silk' }
     category
 
     before(:create) do |book, evaluator|

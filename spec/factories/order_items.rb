@@ -3,6 +3,6 @@ FactoryBot.define do
     transient do
       book
     end
-    quantity 1
+    quantity { 1 }
   end
 end

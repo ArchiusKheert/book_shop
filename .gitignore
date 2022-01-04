@@ -45,3 +45,5 @@ yarn-debug.log*
 .rspec
 
 .env
+
+/public/uploads
