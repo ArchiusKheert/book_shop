@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_order_item, only: %i[index show]
+  before_action :set_order_item, only: %i[index show update]
   before_action :set_categories, only: %i[ index show ]
   before_action :set_current_category, only: %i[ index]
   before_action :set_sort_options, only: %i[index]
@@ -18,6 +18,14 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def update
+    @book = Book.find(params[:id])
+    @book.update_attributes(book_params)
+
+    render :show
+
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -25,7 +33,8 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :price,:year_of_publication, :materials, :description, :height, :width, :depth)
+      params.require(:book).permit(:title, :price,:year_of_publication, :materials, :description, :height, :width, :depth,
+                                   :cover, :cover_cache)
     end
 
     def set_order_item

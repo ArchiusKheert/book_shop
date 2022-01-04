@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :books, only: %i[index show] do
+  resources :books, only: %i[index show update] do
     resources :reviews, only: :create
   end
   resources :carts, only: :show
