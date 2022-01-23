@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_175638) do
+ActiveRecord::Schema.define(version: 2022_01_23_172000) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "first_name"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_175638) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "category_id", null: false
     t.string "cover"
+    t.string "images"
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 
@@ -178,8 +179,6 @@ ActiveRecord::Schema.define(version: 2022_01_04_175638) do
 
   add_foreign_key "addresses", "orders"
   add_foreign_key "addresses", "users"
-  add_foreign_key "authorships", "authors"
-  add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "images", "books"
