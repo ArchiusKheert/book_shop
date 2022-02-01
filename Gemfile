@@ -57,7 +57,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 4.1'
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'shoulda-matchers', '~> 5.1'
@@ -92,3 +92,4 @@ gem 'virtus'
 gem 'fog-aws', '~> 3.12'
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
 gem 'letter_avatar', '~> 0.3.9'
+
