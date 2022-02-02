@@ -2,7 +2,6 @@ FactoryBot.define do
   factory :book do
     transient do
       cost { 99.99 }
-      category_name {FactoryBot.create(:category).id}
     end
     price { 1.0 }
     sequence(:title) { |i| FFaker::Book.title + i.to_s}
@@ -14,10 +13,7 @@ FactoryBot.define do
     materials { 'paper, silk' }
     category
 
-    before(:create) do |book, evaluator|
-      book.category_id = (Category.find_by(name: evaluator.category_name) ||
-        FactoryBot.create(:category, name: evaluator.category_name)).id
-    end
+
 
     after(:create) do |book, evaluator|
       book.price = evaluator.price

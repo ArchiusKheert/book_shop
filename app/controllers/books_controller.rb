@@ -48,11 +48,7 @@ class BooksController < ApplicationController
 
 
   def set_current_category
-    @current_category = if params[:category_id] && Category.ids.include?(params[:category_id].to_i)
-                          @categories.find(params[:category_id])
-                        else
-                          Category.new(id: nil, name: "All")
-                        end
+    @current_category = Category.find_by(id: params[:category_id]) || Category.new(id: nil, name: 'All')
 
   end
 

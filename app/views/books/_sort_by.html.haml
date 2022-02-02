@@ -4,4 +4,4 @@
 %ul.dropdown-menu
   - SORT_OPTIONS.each do |type, query|
     %li
-      = link_to query[:name], books_path(category_id: @current_category.id, sort_by: type)
+      = link_to query[:name], catalog_path(category_id: @current_category.id, sort_by: type)

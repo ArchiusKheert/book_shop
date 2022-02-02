@@ -2,7 +2,7 @@
   %p.lead.small = book.category.name
   .general-thumb-wrap
     .thumbnail.general-thumbnail
-      %img.img-shadow.general-thumbnail-img{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+      = image_tag(book.cover, class: "img-shadow general-thumbnail-img", alt: "design-book")
       .thumb-hover
         .general-thumb-link-wrap
           %a.thumb-hover-link{href: book_path(book)}
