@@ -92,4 +92,5 @@ gem 'virtus'
 gem 'fog-aws', '~> 3.12'
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
 gem 'letter_avatar', '~> 0.3.9'
+gem 'rails_admin', '~> 2.2', '>= 2.2.1'
 
