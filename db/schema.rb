@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_172000) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "book_id", null: false
     t.integer "user_id", null: false
-    t.string "status", default: "unprocessed"
+    t.integer "status", default: "unprocessed"
     t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
