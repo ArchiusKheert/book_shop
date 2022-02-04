@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
   use_doorkeeper
 
   root to: 'home#index'
