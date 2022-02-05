@@ -104,14 +104,6 @@ ActiveRecord::Schema.define(version: 2022_01_23_172000) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "images", force: :cascade do |t|
-    t.text "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "book_id", null: false
-    t.index ["book_id"], name: "index_images_on_book_id"
-  end
-
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
@@ -124,7 +116,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_172000) do
 
   create_table "orders", force: :cascade do |t|
     t.string "number"
-    t.string "status"
+    t.integer "status"
     t.datetime "completed_at"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -181,7 +173,6 @@ ActiveRecord::Schema.define(version: 2022_01_23_172000) do
   add_foreign_key "addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "credit_cards", "users"
-  add_foreign_key "images", "books"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "credit_cards"
