@@ -34,7 +34,7 @@ class BooksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def book_params
       params.require(:book).permit(:title, :price,:year_of_publication, :materials, :description, :height, :width, :depth,
-                                   :cover, :cover_cache)
+                                   :cover, :cover_cache, {images: []}, :images_cache)
     end
 
     def set_order_item

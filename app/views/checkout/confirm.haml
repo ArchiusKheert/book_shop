@@ -7,26 +7,26 @@
       %h3.general-subtitle Shipping Address
       %p.general-address
         = "#{current_order.shipping.first_name} #{current_order.shipping.last_name}"
-        = link_to "edit", ckechout_path(:addresses), class: "general-edit"
+        = link_to "edit", checkout_path(:addresses), class: "general-edit"
         %br
         = current_order.shipping.address
         %br
         = "#{current_order.shipping.city} #{current_order.shipping.zip}"
         %br
-        = current_order.shipping.country
+        = current_order.shipping.country_name
         %br
         = "Phone #{current_order.shipping phone}"
     .col-sm-3
       %h3.general-subtitle Billing Address
       %p.general-address
         = "#{current_order.billing.first_name} #{current_order.billing.last_name}"
-        = link_to "edit", ckechout_path(:addresses), class: "general-edit"
+        = link_to "edit", checkout_path(:addresses), class: "general-edit"
         %br
         = current_order.billing.address
         %br
         = "#{current_order.billing.city} #{current_order.billing.zip}"
         %br
-        = current_order.billing.country
+        = current_order.billing.country_name
         %br
         = "Phone #{current_order.billing phone}"
     .col-sm-3

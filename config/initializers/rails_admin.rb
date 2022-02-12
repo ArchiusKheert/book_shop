@@ -69,7 +69,7 @@ RailsAdmin.config do |config|
       field :authors
       field :category
       field :cover, :carrierwave
-      field :image, :carrierwave
+      field :image
     end
 
     edit do
@@ -84,7 +84,7 @@ RailsAdmin.config do |config|
       field :authors
       field :category
       field :cover, :carrierwave
-      field :image, :carrierwave
+      field :image
     end
   end
 
