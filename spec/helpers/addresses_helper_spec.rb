@@ -27,7 +27,7 @@ RSpec.describe AddressesController, type: :controller do
       expect(assigns(:addresses)).not_to be_nil
     end
   end
-  
+
 
   describe 'PATCH #update' do
     let(:address) {FactoryBot.attributes_for(:address) }

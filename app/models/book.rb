@@ -1,10 +1,10 @@
 class Book < ApplicationRecord
-  has_many :authorships
-  has_many :authors, through: :authorships
-  belongs_to :category
-  has_many :order_items
-  has_many :orders, through: :order_items
-  has_many :reviews
+  has_many :authorships, dependent: :destroy
+  has_many :authors, through: :authorships, dependent: :destroy
+  belongs_to :category, dependent: :destroy
+  has_many :order_items, dependent: :destroy
+  has_many :orders, through: :order_items, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
 
   validates :title, presence: true, uniqueness: true

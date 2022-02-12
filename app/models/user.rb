@@ -8,10 +8,12 @@ class User < ApplicationRecord
   attr_accessor :skip_password_validation
 
   validates :email, presence: true,
-            format: {with: /@/, message: 'not valid'}
+            format: {with: /@/, message: 'invalid format'}
 
   validates :password, format: { with: /\A\S(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\S*\z/i,
-                                 message: 'should contain at least 1 lowercase, at least 1 uppercase, at least 1 number. No whitespaces',
+                                 message: 'should contain at least 1 lowercase, \
+                                 at least 1 uppercase, at least 1 number. \
+                                 No whitespaces',
 
                                  }
   has_many :reviews, dependent: :destroy

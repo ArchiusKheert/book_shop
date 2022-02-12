@@ -11,5 +11,3 @@ SORT_OPTIONS =
     title_z_a: {name: "Title: Z to A", query: 'title DESC'}
   }.freeze
 
-
-ORDER_STATUSES = %w[in_progress in_queue in_delivery delivered canceled].freeze

@@ -50,7 +50,7 @@
     - current_order.order_items.each do |oi|
       .general-cart-item.divider-lg
         .general-img-wrap-table
-          %img.cart-img-shadow{src: "https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg", alt: "design-book"}
+          = image_tag(oi.book.cover, class: 'cart-img-shadow', alt: 'design-book')
         %p.title= oi.book.title
         %table.table
           %tr
@@ -86,7 +86,7 @@
           %tr
             %td
               .general-img-wrap-table
-                %img.cart-img-shadow{src: 'https://images-na.ssl-images-amazon.com/images/I/81Kq0YS4lzL.jpg', alt: "design-book"}
+                = image_tag(order_item.book.cover, class: 'cart-img-shadow', alt: 'design-book')
             %td
               %p.title = order_item.book.title
               %p.in-grey-600.fw-300 = order_item.book.description.split('.').first

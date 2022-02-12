@@ -1,5 +1,6 @@
 class Delivery < ApplicationRecord
-  has_many :orders
+  has_many :orders, dependent: :destroy
+
   validates :name, :price, :time, presence: true
 
   validates :name, uniqueness: true

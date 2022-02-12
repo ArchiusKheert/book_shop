@@ -1,14 +1,5 @@
 class AddressesForm
   include ActiveModel::Model
-  include Virtus.model
-
-  attribute :first_name,  String
-  attribute :last_name,   String
-  attribute :address,     String
-  attribute :city,        String
-  attribute :country,     String
-  attribute :zip,         String
-  attribute :phone,       String
 
   attr_reader :params, :relation, :use_billing
 
